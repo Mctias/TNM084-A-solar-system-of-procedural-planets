@@ -16,12 +16,11 @@ require([
     "../libs/text!../shaders/forceFieldVertex.glsl",
     "../libs/text!../shaders/forceFieldFragment.glsl",
     "../libs/text!../shaders/volcanoAtmoFragment.glsl",
-    "../libs/text!../shaders/shieldFragment.glsl",
     "../libs/OrbitControls.js"
 ],
 
 function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex, cloudFragment, atmoVertex, atmoFragment, volcanoVertex, 
-		volcanoFragment, sunVertex, sunFragment, forceFieldVertex, forceFieldFragment, volcanoAtmoFragment, shieldFragment)
+		volcanoFragment, sunVertex, sunFragment, forceFieldVertex, forceFieldFragment, volcanoAtmoFragment)
 {
 	Init();
 
@@ -166,8 +165,8 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
         var shieldShaderMaterial = new THREE.ShaderMaterial(
         {	
         	uniforms: planetUniforms,
-            vertexShader: noise + atmoVertex,
-            fragmentShader: noise + shieldFragment,
+            vertexShader: noise + forceFieldVertex,
+            fragmentShader: noise + forceFieldFragment,
             transparent: true
         } );
 
@@ -192,7 +191,7 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
         var sheildPlanet = new THREE.Mesh(shieldPlanetGeometry, shaderMaterial);
         var shield = new THREE.Mesh(shieldGeometry, shieldShaderMaterial);
 		
-		gasPlanet.position.set(1500, 0, 0);
+		gasPlanet.position.set(1500, 0, -1500);
 		
 		regularPlanet.position.set(500, 0, 0);
 		cloudMap.position.set(500, 0, 0);
@@ -201,8 +200,8 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
 		volcanoPlanet.position.set(300, 0, 0);
 		volcanoAtmoMap.position.set(300, 0, 0);
 
-		sheildPlanet.position.set(750, 0, 100);
-		shield.position.set(750, 0, 100);
+		sheildPlanet.position.set(750, 0, -750);
+		shield.position.set(750, 0, -750);
 
 	
 		scene.add(skybox);
@@ -237,9 +236,9 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
 
 		pivotPoint2.add(gasPlanet);
 		
-		//pivotPoint3.add(cloudMap);
-		//pivotPoint3.add(atmoMap);
-		//pivotPoint3.add(regularPlanet);
+		pivotPoint3.add(cloudMap);
+		pivotPoint3.add(atmoMap);
+		pivotPoint3.add(regularPlanet);
 		
 		camera.position.set(150, 150, -250);
 	
@@ -252,13 +251,13 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
 		{
 			//planet.rotation.x += 0.01;
 			pivotPoint1.rotation.y += 0.002;
-			pivotPoint2.rotation.y += 0.003;
-			pivotPoint3.rotation.y += 0.0005;
+			pivotPoint2.rotation.y += 0.0003;
+			pivotPoint3.rotation.y += 0.001;
 	
 	
-			//volcanoPlanet.rotation.y += 0.01;
+			volcanoPlanet.rotation.y += 0.01;
 			gasPlanet.rotation.y += 0.005;
-			//regularPlanet.rotation.y += 0.001;
+			regularPlanet.rotation.y += 0.001;
 			cloudMap.rotation.y += 0.0035;
 			sheildPlanet.rotation.y += 0.02;
 			shield.rotation.y += 0.02;
@@ -267,8 +266,7 @@ function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex,
 		//Draw scene
 		var render = function ()
 		{
-			renderer.render(scene, camera);
-			
+			renderer.render(scene, camera);	
 		};
 		
 		//Update, render, repeat

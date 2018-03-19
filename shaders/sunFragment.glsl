@@ -4,8 +4,6 @@ varying float surfaceLevel;
 varying vec3 pos;
 varying float t;
 
-
-
 //Sun color. Basically red and yellow noise that moves and glows
 vec3 sunF(vec3 p)
 {
