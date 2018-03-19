@@ -6,7 +6,7 @@
 /*jslint regexp: true */
 /*global require, XMLHttpRequest, ActiveXObject,
   define, window, process, Packages,
-  java, location, Components, FileUtils */
+  java, location, Components, FileUtils g*/
 
 define(['module'], function (module) {
     'use strict';
