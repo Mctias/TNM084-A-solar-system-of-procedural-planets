@@ -16,7 +16,7 @@ require([
     "../libs/text!../shaders/forceFieldVertex.glsl",
     "../libs/text!../shaders/forceFieldFragment.glsl",
     "../libs/text!../shaders/volcanoAtmoFragment.glsl",
-    "../libs/OrbitControls.js"
+    //"../libs/OrbitControls.js"
 ],
 
 function(vertexShader, fragmentShader, noise, gasVertex, gasShader, cloudVertex, cloudFragment, atmoVertex, atmoFragment, volcanoVertex, 
